@@ -1,0 +1,425 @@
+@import "tailwindcss";
+
+@theme {
+  /* Animal Zoom brand palette — teal family, no black backgrounds */
+  --color-mint-50: #EBFBFB;
+  --color-mint-100: #DBF5F5;
+  --color-teal-300: #6FB3B5;
+  --color-teal-400: #409497;
+  --color-teal-500: #418D90;
+  --color-teal-600: #255661;
+  --color-teal-700: #214F57;
+  --color-teal-800: #163a40;
+  --color-teal-900: #0f2a2e;
+
+  --font-display: "Poppins", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-body: "Montserrat", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --shadow-soft: 0 1px 2px rgba(33, 79, 87, 0.06), 0 8px 24px -8px rgba(33, 79, 87, 0.16);
+  --shadow-lift: 0 4px 12px rgba(33, 79, 87, 0.10), 0 30px 60px -18px rgba(33, 79, 87, 0.34);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+  body {
+    font-family: var(--font-body);
+    color: var(--color-teal-700);
+    background-color: #ffffff;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+  ::selection {
+    background-color: var(--color-mint-100);
+    color: var(--color-teal-700);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-teal-500);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@utility btn {
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-300 ease-out focus-visible:outline-2 focus-visible:outline-offset-2;
+  min-height: 44px;
+}
+
+@layer components {
+  .container-page {
+    @apply relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+  .section-pad {
+    @apply py-16 sm:py-24 lg:py-32;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-teal-500;
+  }
+  .eyebrow-light {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-mint-100;
+  }
+
+  .btn-primary {
+    @apply btn bg-teal-500 text-white shadow-soft hover:bg-teal-600 hover:shadow-lift active:bg-teal-700;
+  }
+  .btn-accent {
+    @apply btn bg-teal-700 text-white shadow-soft hover:bg-teal-800 hover:shadow-lift;
+  }
+  .btn-outline {
+    @apply btn border-2 border-teal-700/15 bg-transparent text-teal-700 hover:border-teal-500 hover:text-teal-500;
+  }
+  .btn-ghost-light {
+    @apply btn border-2 border-white/40 text-white hover:border-white hover:bg-white/10;
+  }
+  .btn-whatsapp {
+    @apply btn bg-[#25D366] text-white shadow-soft hover:brightness-95 hover:shadow-lift;
+  }
+  .btn-call {
+    @apply btn bg-white text-teal-700 border-2 border-teal-700/15 shadow-soft hover:border-teal-500 hover:text-teal-500;
+  }
+
+  .card {
+    @apply rounded-2xl border border-teal-700/[0.08] bg-white shadow-soft transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lift;
+  }
+  .card-dark {
+    @apply rounded-2xl border border-white/10 bg-teal-700 shadow-soft transition-all duration-300 ease-out hover:-translate-y-1 hover:border-teal-300/40;
+  }
+
+  .nav-link {
+    @apply relative text-sm font-semibold text-teal-700 transition-colors duration-200 hover:text-teal-500;
+  }
+  .nav-link.is-active { @apply text-teal-500; }
+  .nav-link-dark {
+    @apply relative text-sm font-semibold text-white/85 transition-colors duration-200 hover:text-white;
+  }
+  .nav-link-dark.is-active { @apply text-white; }
+
+  .logo-mark { transition: opacity 0.3s ease; }
+  .logo-mark--dark { position: absolute; inset: 0; opacity: 0; }
+  .site-header.is-scrolled .logo-mark--light { opacity: 0; }
+  .site-header.is-scrolled .logo-mark--dark { opacity: 1; }
+
+  .site-logo-word { @apply text-white transition-colors duration-300; }
+  .site-header.is-scrolled .site-logo-word { @apply text-teal-700; }
+  .site-logo-sub { @apply text-mint-100 transition-colors duration-300; }
+  .site-header.is-scrolled .site-logo-sub { @apply text-teal-500; }
+
+  .header-action-light { @apply text-white/90 transition-colors duration-300 hover:text-white; }
+  .site-header.is-scrolled .header-action-light { @apply text-teal-700 hover:text-teal-500; }
+
+  .header-lang-light { @apply border-white/30 text-white/90 transition-colors duration-300 hover:border-white hover:text-white; }
+  .site-header.is-scrolled .header-lang-light { @apply border-teal-700/15 text-teal-600 hover:border-teal-500 hover:text-teal-500; }
+  .header-lang-light span { @apply text-white/50 transition-colors duration-300; }
+  .site-header.is-scrolled .header-lang-light span { @apply text-teal-400; }
+
+  .header-burger-light { @apply text-white transition-colors duration-300; }
+  .site-header.is-scrolled .header-burger-light { @apply text-teal-700; }
+
+  .reveal { opacity: 0; }
+
+  .bg-grid {
+    background-color: var(--color-mint-50);
+    background-image:
+      linear-gradient(to right, rgba(33, 79, 87, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(33, 79, 87, 0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  /* White hero with a soft light-blue glow — used on the homepage hero */
+  .hero-light {
+    position: relative;
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+  /* Cursor-following blob, confined to its hero section */
+  .mouse-blob {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15rem;
+    height: 15rem;
+    margin: -7.5rem 0 0 -7.5rem;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(173, 222, 229, 0.5), rgba(173, 222, 229, 0.22) 55%, rgba(173, 222, 229, 0) 75%);
+    filter: blur(20px);
+    pointer-events: none;
+    will-change: transform;
+    z-index: 0;
+  }
+
+  /* Little paw prints along the page margins */
+  .side-paws {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 4.5rem;
+    z-index: 1;
+    opacity: 0.1;
+    pointer-events: none;
+    background-repeat: repeat-y;
+    background-size: 64px 210px;
+    background-position: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 210'%3E%3Cg fill='%23787276'%3E%3Cg transform='translate(4 24) rotate(-16) scale(0.5)'%3E%3Cellipse cx='32' cy='40' rx='14' ry='11'/%3E%3Cellipse cx='14' cy='24' rx='6' ry='8'/%3E%3Cellipse cx='27' cy='14' rx='6.5' ry='8.5'/%3E%3Cellipse cx='42' cy='14' rx='6.5' ry='8.5'/%3E%3Cellipse cx='54' cy='25' rx='6' ry='8'/%3E%3C/g%3E%3Cg transform='translate(30 118) rotate(14) scale(0.5)'%3E%3Cellipse cx='32' cy='40' rx='14' ry='11'/%3E%3Cellipse cx='14' cy='24' rx='6' ry='8'/%3E%3Cellipse cx='27' cy='14' rx='6.5' ry='8.5'/%3E%3Cellipse cx='42' cy='14' rx='6.5' ry='8.5'/%3E%3Cellipse cx='54' cy='25' rx='6' ry='8'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .side-paws--left { left: 0.5rem; }
+  .side-paws--right { right: 0.5rem; transform: scaleX(-1); }
+
+  /* Deep teal hero/section — brand's darkest tone, never pure black */
+  .hero-dark {
+    position: relative;
+    background: radial-gradient(ellipse 900px 560px at 50% 22%, rgba(65, 141, 144, 0.30), transparent 68%),
+      var(--color-teal-700);
+    overflow: hidden;
+  }
+  .hero-dark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black, transparent);
+    pointer-events: none;
+  }
+
+  /* Paw-print decorative motif */
+  .paw-mark {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='%23ffffff'%3E%3Cellipse cx='32' cy='40' rx='14' ry='11'/%3E%3Cellipse cx='14' cy='24' rx='6' ry='8'/%3E%3Cellipse cx='27' cy='14' rx='6.5' ry='8.5'/%3E%3Cellipse cx='42' cy='14' rx='6.5' ry='8.5'/%3E%3Cellipse cx='54' cy='25' rx='6' ry='8'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .corner-mark { position: absolute; width: 20px; height: 20px; z-index: 3; pointer-events: none; }
+  .corner-mark.tl { top: -1px; left: -1px; border-top: 2px solid var(--color-teal-300); border-left: 2px solid var(--color-teal-300); }
+  .corner-mark.tr { top: -1px; right: -1px; border-top: 2px solid var(--color-teal-300); border-right: 2px solid var(--color-teal-300); }
+  .corner-mark.bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--color-teal-300); border-left: 2px solid var(--color-teal-300); }
+  .corner-mark.br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--color-teal-300); border-right: 2px solid var(--color-teal-300); }
+
+  .line-mask { display: inline-block; overflow: hidden; vertical-align: top; }
+  .line-mask__inner { display: inline-block; transform: translateY(110%); }
+
+  .nav-indicator {
+    position: absolute;
+    bottom: -6px;
+    height: 2px;
+    background: var(--color-teal-300);
+    border-radius: 2px;
+    width: 0;
+    opacity: 0;
+    transition: background-color 0.3s ease, left 0.35s ease, width 0.35s ease, opacity 0.3s ease;
+  }
+  .site-header.is-scrolled .nav-indicator {
+    background: var(--color-teal-500);
+    bottom: -1px;
+  }
+
+  .stat-figure {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 26s linear infinite;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+  }
+
+  .site-header {
+    @apply fixed inset-x-0 top-0 z-50 border-b border-transparent transition-all duration-300;
+    background: transparent;
+  }
+  .site-header.is-scrolled {
+    @apply border-teal-700/[0.08] bg-white/95 backdrop-blur-md;
+  }
+  .site-header.site-header--solid {
+    @apply border-teal-700/[0.06] bg-white/95 backdrop-blur-md;
+  }
+  .site-header.is-scrolled .nav-link-dark,
+  .site-header.is-scrolled .nav-link-dark.is-active { @apply text-teal-700; }
+  .site-header.is-scrolled .nav-link-dark:hover { @apply text-teal-500; }
+
+  .hamburger-line { @apply block h-[1.5px] w-5 bg-current transition-all duration-300 ease-out; }
+  [data-nav-toggle].is-open .hamburger-line:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+  [data-nav-toggle].is-open .hamburger-line:nth-child(2) { opacity: 0; }
+  [data-nav-toggle].is-open .hamburger-line:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+
+  .pill-badge {
+    @apply inline-flex items-center gap-2 rounded-full border border-teal-700/10 bg-white px-4 py-1.5 text-xs font-semibold text-teal-700 shadow-soft;
+  }
+  .pill-badge .dot {
+    @apply h-1.5 w-1.5 rounded-full bg-teal-500;
+  }
+  .pill-badge-light {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur-sm;
+  }
+  .pill-badge-light .dot {
+    @apply h-1.5 w-1.5 rounded-full bg-teal-300;
+  }
+
+  .float-card {
+    @apply absolute flex items-center gap-3 rounded-2xl border border-teal-700/[0.07] bg-white px-4 py-3 shadow-lift;
+  }
+
+  .tag-pill {
+    @apply inline-flex items-center rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold text-white;
+  }
+  .tag-pill-light {
+    @apply inline-flex items-center rounded-full border border-teal-700/10 bg-white px-4 py-2 text-xs font-semibold text-teal-700 shadow-soft;
+  }
+
+  .dot-nav button {
+    @apply h-2 w-2 rounded-full bg-teal-700/15 transition-all duration-300;
+  }
+  .dot-nav button.is-active {
+    @apply w-6 bg-teal-500;
+  }
+
+  .portfolio-tile {
+    @apply relative overflow-hidden rounded-3xl;
+  }
+  .portfolio-tile__bg {
+    @apply absolute inset-0 h-full w-full scale-100 object-cover transition-transform duration-700 ease-out group-hover:scale-110;
+  }
+  .portfolio-tile__caption {
+    @apply absolute inset-x-0 bottom-0 z-10 flex items-center justify-between gap-2 p-5;
+    background: linear-gradient(to top, rgba(21, 58, 64, 0.72), transparent 70%);
+  }
+
+  [data-accordion-panel] {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.35s ease;
+  }
+  [data-chevron] { transition: transform 0.3s ease; }
+  [data-accordion-trigger][aria-expanded="true"] [data-chevron] { transform: rotate(180deg); }
+  [data-accordion-trigger][aria-expanded="true"] .font-display { color: var(--color-teal-500); }
+
+  /* ---- Booking widget ("Agenda tu cita") ---- */
+  .booking-widget {
+    @apply rounded-[2rem] border border-teal-700/[0.08] bg-white p-6 shadow-lift sm:p-8;
+  }
+  .booking-steps {
+    @apply mb-8 flex items-center justify-between gap-2;
+  }
+  .booking-step-dot {
+    @apply flex flex-1 items-center gap-2;
+  }
+  .booking-step-dot .num {
+    @apply grid h-8 w-8 shrink-0 place-items-center rounded-full border-2 border-teal-700/15 text-xs font-bold text-teal-700/50 transition-all duration-300;
+  }
+  .booking-step-dot .line {
+    @apply h-[2px] w-full flex-1 bg-teal-700/10 transition-all duration-500;
+  }
+  .booking-step-dot:last-child .line { @apply hidden; }
+  .booking-step-dot.is-active .num,
+  .booking-step-dot.is-done .num {
+    @apply border-teal-500 bg-teal-500 text-white;
+  }
+  .booking-step-dot.is-done .line { @apply bg-teal-500; }
+
+  .booking-panel { display: none; }
+  .booking-panel.is-active { display: block; }
+
+  .booking-option {
+    @apply relative cursor-pointer rounded-2xl border-2 border-teal-700/10 bg-mint-50 p-5 text-left transition-all duration-250 ease-out hover:border-teal-400;
+  }
+  .booking-option.is-selected {
+    @apply border-teal-500 bg-mint-100 shadow-soft;
+  }
+  .booking-option.is-selected .booking-option__check {
+    @apply scale-100 opacity-100;
+  }
+  .booking-option__check {
+    @apply absolute top-4 right-4 grid h-6 w-6 scale-75 place-items-center rounded-full bg-teal-500 text-white opacity-0 transition-all duration-250;
+  }
+
+  .pricing-card {
+    @apply relative flex flex-col rounded-[1.75rem] border border-teal-700/[0.08] bg-white p-7 shadow-soft transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-lift sm:p-8;
+  }
+  .pricing-card--featured {
+    @apply border-teal-400/60 bg-teal-700 text-white shadow-lift;
+  }
+  .pricing-card--featured .pricing-card__meta { @apply text-white/65; }
+  .pricing-card--featured .pricing-card__price { @apply text-mint-100; }
+
+  .featured-ribbon {
+    @apply absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-teal-500 px-4 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white shadow-soft;
+  }
+
+  .placeholder-tag {
+    @apply ml-1.5 rounded-full bg-teal-700/[0.06] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-teal-700/50;
+  }
+
+  /* Promo ticker (current offers, styled after their Instagram promos) */
+  .promo-ticker {
+    @apply bg-teal-700 text-white text-xs sm:text-sm font-semibold;
+  }
+
+  /* Service tile grid (asymmetric photo cards) */
+  .service-tile {
+    @apply relative flex flex-col overflow-hidden rounded-[1.75rem] bg-mint-50 p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lift;
+    min-height: 15rem;
+  }
+  .service-tile--highlight {
+    @apply bg-teal-500;
+  }
+  .service-tile__body {
+    @apply relative z-10 pr-10;
+  }
+  .service-tile__title {
+    @apply font-display text-lg text-teal-700;
+  }
+  .service-tile--highlight .service-tile__title {
+    @apply text-white;
+  }
+  .service-tile__meta {
+    @apply mt-1.5 text-xs text-teal-700/55;
+  }
+  .service-tile--highlight .service-tile__meta {
+    @apply text-white/75;
+  }
+  .service-tile__arrow {
+    @apply absolute right-5 top-5 z-10 grid h-9 w-9 place-items-center rounded-full bg-white text-teal-600 shadow-soft transition-transform duration-300;
+  }
+  .service-tile:hover .service-tile__arrow {
+    transform: rotate(45deg);
+  }
+  .service-tile__photo {
+    @apply absolute inset-x-0 bottom-0 z-0 object-cover;
+    height: 60%;
+    width: 100%;
+  }
+  .service-tile__photo-wrap {
+    @apply absolute inset-x-0 bottom-0 overflow-hidden;
+    height: 60%;
+  }
+  .service-tile__photo-wrap img {
+    @apply h-full w-full object-cover transition-transform duration-500 ease-out;
+  }
+  .service-tile:hover .service-tile__photo-wrap img {
+    transform: scale(1.06);
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "animal-zoom",
+  "version": "1.0.0",
+  "description": "Animal Zoom — Clínica Veterinaria & Estética — sitio web",
+  "private": true,
+  "scripts": {
+    "build": "tailwindcss -i src/input.css -o assets/css/main.css --minify",
+    "watch": "tailwindcss -i src/input.css -o assets/css/main.css --watch",
+    "serve": "npx serve . -l 5173"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
